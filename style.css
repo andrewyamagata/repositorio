@@ -3,8 +3,14 @@
 body {
   padding: 0;
   margin: 0;
-  color: #ffffff;
+  color: black;
   font-family: "amatic sc", sans-serif;
+  box-sizing: border-box;
+  transition: margin-top 0.3s ease-in-out;
+}
+
+.body-index {
+  color: #ffffff;
 }
 
 /*HEADER */
@@ -35,6 +41,7 @@ body {
 .social-media {
   margin-top: 1rem;
   display: flex;
+  gap: 1rem;
 }
 
 .social-media a {
@@ -48,6 +55,7 @@ body {
   justify-content: center;
   align-items: center;
   transition: 0.5s cubic-bezier(0.55, 0.025, 0.675, 0.97);
+  border-radius: 5rem;
 }
 
 a:hover {
@@ -67,131 +75,105 @@ a:hover {
   }
 }
 
-/* MENU HAMBURGUER */
+/* MENU HEADER */
 
-.checkbox-container {
+.menu {
+  margin: 0;
+  padding: 0;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
+  padding: 10px 20px;
+  background: #333;
+  color: white;
 }
 
-.checkbox {
-  height: 100px;
-  width: 100px;
-  position: absolute;
-  top: 0;
-  right: 0;
+.menu img {
+  height: 50px;
+}
+
+/* Estilização do menu padrão (desktop) */
+nav ul {
   display: flex;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 9999;
-  transition: 400ms ease-in-out 0s;
+  list-style: none;
 }
 
-.checkbox .trace {
-  width: 50px;
-  height: 2px;
-  background-color: #ffffff;
-  position: absolute;
-  border-radius: 4px;
-  transition: 0.5s ease-in-out;
+nav ul li {
+  margin: 0 15px;
 }
 
-.checkbox .trace:nth-child(1) {
-  top: 26px;
-  transform: rotate(0);
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 18px;
 }
 
-.checkbox .trace:nth-child(2) {
-  top: 46px;
-  transform: rotate(0);
-}
-
-.checkbox .trace:nth-child(3) {
-  top: 66px;
-  transform: rotate(0);
-}
-
-#toggle {
+/* Menu hamburguer (mobile) */
+#menu-toggle {
   display: none;
 }
 
-/* MENU */
-
-.menu {
-  position: absolute;
-  top: 28px;
-  right: 30px;
-  background: transparent;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
-  box-shadow: 0px 0px 0px 0px #ffffff;
-  z-index: -1;
-  transition: 400ms ease-in-out 0s;
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
 }
 
-.menu-item {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 2;
-  opacity: 0;
-  visibility: hidden;
-  transition: 400ms ease-in-out 0s;
-}
-
-.menu-item ul {
-  list-style-type: none;
-}
-
-.menu-item ul li a {
-  margin: 10px 0;
-  color: #3e8f92;
-  text-decoration: none;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  font-size: 40px;
-}
-
-/* ANIMAÇÃO DO MENU */
-
-#toggle:checked + .checkbox .trace:nth-child(1) {
-  transform: rotate(45deg);
-  background-color: #3e8f92;
-  top: 47px;
-}
-
-#toggle:checked + .checkbox .trace:nth-child(2) {
-  transform: translateX(-100px);
+.hamburger span {
+  background: white;
+  height: 4px;
   width: 30px;
-  visibility: hidden;
-  opacity: 0;
+  margin: 5px 0;
+  transition: 0.3s;
 }
 
-#toggle:checked + .checkbox .trace:nth-child(3) {
-  transform: rotate(-45deg);
-  background-color: #3e8f92;
-  top: 48px;
-}
+/* Estilo para telas menores */
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
 
-#toggle:checked + .checkbox {
-  background-color: white;
-}
+  nav {
+    /* position: absolute; */
+    top: 70px;
+    left: 0;
+    width: 100%;
+    background: #222;
+    text-align: center;
+    padding: 20px 0;
+    display: none;
+  }
 
-#toggle:checked ~ .menu {
-  box-shadow: 0px 0px 0px 100vmax white;
-  z-index: 1;
-}
+  nav ul {
+    flex-direction: column;
+  }
 
-#toggle:checked ~ .menu-item {
-  visibility: visible;
-  opacity: 1;
+  nav ul li {
+    margin: 15px 0;
+  }
+
+  /* Exibir menu quando o checkbox for ativado */
+  #menu-toggle:checked + .hamburger + nav {
+    display: block;
+  }
+
+  /* Empurrando o body para baixo */
+  #menu-toggle:checked ~ body {
+    margin-top: 200rem; /* Ajuste conforme necessário */
+  }
+
+  /* Animação do botão hamburguer */
+  #menu-toggle:checked + .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  #menu-toggle:checked + .hamburger span:nth-child(2) {
+    opacity: 0;
+  }
+
+  #menu-toggle:checked + .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+  }
 }
 
 /* CARDS */
@@ -304,16 +286,81 @@ a:hover {
   transition: 0.3s;
 }
 
+/* OUTRAS PÁGINAS */
+
+h5 {
+  font-size: 3.5rem;
+  height: 10vh; /* Aumenta a altura do cabeçalho */
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 2px; /* Reduz o espaçamento entre as letras */
+  margin: 0; /* Remove a margem padrão */
+  background-color: #2c3e7a; /* Cor de fundo do cabeçalho */
+  color: #fff; /* Cor do texto no cabeçalho */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil */
+  transition: background-color 0.3s ease; /* Transição suave da cor de fundo */
+}
+
+h2 {
+  text-align: center;
+}
+
+h5:hover {
+  background-color: #1a274f; /* Cor de fundo mais escura ao passar o mouse */
+}
+
+.container-home {
+  max-width: 50%; /* Ajuste conforme necessário */
+  margin: 0.2rem auto; /* Centraliza o contêiner */
+  padding: 0.1rem auto;
+  margin-bottom: 0rem;
+}
+
+.responsive-iframe-container {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%; /* Proporção 16:9 */
+  overflow: hidden; /* Garante que o iframe não ultrapasse o contêiner */
+}
+
+.responsive-iframe-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none; /* Remove a borda padrão do iframe */
+}
+
+@media screen and (min-width: 601px) {
+  .container-home {
+    width: 50%;
+    float: left;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .container-home {
+    width: 100%;
+    float: none;
+  }
+}
+
 /* FOOTER */
 .footer {
   height: 100px;
   width: 100%;
+  color: #ffffff;
+  bottom: 0rem;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #2c3e7a;
 }
-
 /*RESPONSIVO */
 
 @media (max-width: 800px) {
