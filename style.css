@@ -314,7 +314,7 @@ h5:hover {
 }
 
 .container-home {
-  max-width: 50%; /* Ajuste conforme necessário */
+  max-width: 100%; /* Ajuste conforme necessário */
   margin: 0.2rem auto; /* Centraliza o contêiner */
   padding: 0.1rem auto;
   margin-bottom: 0rem;
